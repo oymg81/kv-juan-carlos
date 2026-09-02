@@ -1,6 +1,6 @@
 export default function Testimonials() {
   return (
-    <section>
+    <section id="historias">
       Testimonials
     </section>
   );

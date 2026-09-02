@@ -47,7 +47,7 @@ export default function Hero() {
           {/* Primary CTA & High-Contrast Microcopy */}
           <div className="mt-8 sm:mt-10 flex flex-col items-start">
             <Link
-              href="#contacto"
+              href="#agenda"
               className="inline-flex items-center justify-center bg-[#967751] hover:bg-[#a6855b] text-[#f5f3ef] text-xs tracking-[0.2em] uppercase font-sans font-medium px-7 sm:px-8 py-3.5 border border-[#c5a880]/40 hover:border-[#c5a880]/70 shadow-md shadow-black/30 hover:shadow-black/50 transition-all duration-300 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
             >
               AGENDA TU CITA PRIVADA

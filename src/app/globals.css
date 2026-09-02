@@ -23,6 +23,19 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 5.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {

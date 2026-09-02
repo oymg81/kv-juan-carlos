@@ -1,6 +1,6 @@
 export default function AboutKV() {
   return (
-    <section>
+    <section id="sobre-kv">
       AboutKV
     </section>
   );

@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <section>
+    <footer id="contacto">
       Footer
-    </section>
+    </footer>
   );
 }

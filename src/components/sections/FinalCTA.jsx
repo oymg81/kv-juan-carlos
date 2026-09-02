@@ -1,6 +1,6 @@
 export default function FinalCTA() {
   return (
-    <section>
+    <section id="agenda">
       FinalCTA
     </section>
   );
