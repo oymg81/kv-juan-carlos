@@ -1,7 +1,130 @@
+import { showroomsData } from "@/data/showrooms";
+
 export default function Showrooms() {
+  const { eyebrow, title, introduction, phone, locations } = showroomsData;
+
   return (
-    <section>
-      Showrooms
+    <section
+      id="showrooms"
+      className="relative w-full bg-[#faf8f5] text-[#171615] py-24 sm:py-32 lg:py-40 border-t border-[#171615]/5"
+      aria-labelledby="showrooms-heading"
+    >
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#8e785c] font-sans font-medium mb-3 block">
+            {eyebrow}
+          </span>
+          <h2
+            id="showrooms-heading"
+            className="font-serif font-light text-3xl sm:text-4xl lg:text-[2.75rem] text-[#171615] tracking-tight leading-[1.18] mb-6"
+          >
+            {title}
+          </h2>
+          <p className="text-sm sm:text-base text-[#524e48] font-sans leading-relaxed">
+            {introduction}
+          </p>
+        </div>
+
+        {/* Showrooms Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+          {locations.map((location) => (
+            <article
+              key={location.id}
+              className="relative bg-[#f0eae1]/60 border border-[#ded5c9] p-8 sm:p-10 lg:p-12 flex flex-col justify-between transition-all duration-300 hover:border-[#c5a880]/60 shadow-sm shadow-black/[0.02] group"
+            >
+              {/* Inner Decorative Hairline Frame */}
+              <div
+                className="absolute inset-3 border border-[#c5a880]/15 pointer-events-none"
+                aria-hidden="true"
+              />
+
+              {/* Top Meta & Numbering */}
+              <div className="relative z-10 flex items-center justify-between pb-8 border-b border-[#ded5c9]">
+                <div>
+                  <span className="text-[11px] uppercase tracking-[0.25em] text-[#8e785c] font-sans font-medium block">
+                    {location.tag}
+                  </span>
+                  <h3 className="font-serif text-2xl sm:text-3xl text-[#171615] tracking-wide mt-1">
+                    {location.name}
+                  </h3>
+                </div>
+                <span
+                  className="font-serif text-3xl sm:text-4xl text-[#8e785c]/40 font-light select-none"
+                  aria-hidden="true"
+                >
+                  {location.number}
+                </span>
+              </div>
+
+              {/* Address & Attention Condition */}
+              <div className="relative z-10 py-8 space-y-6">
+                <address className="not-italic text-sm sm:text-base text-[#524e48] font-sans leading-relaxed">
+                  <p className="text-[#171615] font-medium text-base sm:text-lg">
+                    {location.address.street}
+                  </p>
+                  <p className="text-[#6b6761] mt-1">
+                    {location.address.city}, {location.address.country}
+                  </p>
+                </address>
+
+                <div className="flex items-center gap-2.5 text-xs uppercase tracking-[0.16em] text-[#8e785c] font-sans font-medium">
+                  <span
+                    className="w-1.5 h-1.5 rounded-full bg-[#8e785c]"
+                    aria-hidden="true"
+                  />
+                  <span>{location.condition}</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="relative z-10 pt-6 border-t border-[#ded5c9] flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+                <a
+                  href={location.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Abrir ubicación de Showroom ${location.name} en Google Maps`}
+                  className="flex-1 inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase font-sans font-medium px-5 py-3.5 border border-[#171615]/20 hover:border-[#8e785c] text-[#171615] hover:text-[#8e785c] hover:bg-white/40 transition-all duration-300 min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8e785c]"
+                >
+                  <span>Abrir en Google Maps</span>
+                  <svg
+                    className="w-3.5 h-3.5 stroke-current fill-none shrink-0"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                    />
+                  </svg>
+                </a>
+
+                <a
+                  href={phone.href}
+                  aria-label={`Llamar a KV al ${phone.display} para agendar cita previa en ${location.name}`}
+                  className="inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase font-sans font-medium px-5 py-3.5 border border-[#8e785c]/30 hover:border-[#8e785c] text-[#8e785c] hover:text-[#171615] hover:bg-[#8e785c]/10 transition-all duration-300 min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8e785c]"
+                >
+                  <svg
+                    className="w-3.5 h-3.5 stroke-current fill-none shrink-0"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                    />
+                  </svg>
+                  <span>Llamar</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

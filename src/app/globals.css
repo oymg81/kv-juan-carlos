@@ -53,3 +53,18 @@ body {
 .font-sans {
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
+
+.footer-credit-link {
+  color: var(--gold-accent);
+  text-decoration-color: color-mix(in srgb, var(--gold-accent) 40%, transparent);
+}
+
+.footer-credit-link:hover {
+  color: var(--gold-accent-hover);
+  text-decoration-color: var(--gold-accent-hover);
+}
+
+.footer-credit-link:focus-visible {
+  outline: 2px solid var(--gold-accent);
+  outline-offset: 2px;
+}

@@ -9,17 +9,8 @@ const NAV_LINKS = [
   { href: "#experiencia", id: "experiencia", label: "Experiencia KV" },
   { href: "#proceso", id: "proceso", label: "Proceso" },
   { href: "#sobre-kv", id: "sobre-kv", label: "Sobre KV" },
-  { href: "#historias", id: "historias", label: "Historias" },
+  { href: "#showrooms", id: "showrooms", label: "Showrooms" },
   { href: "#contacto", id: "contacto", label: "Contacto" },
-];
-
-const OBSERVED_SECTIONS = [
-  "inicio",
-  "experiencia",
-  "proceso",
-  "sobre-kv",
-  "historias",
-  "contacto",
 ];
 
 export default function Navbar() {
@@ -73,72 +64,66 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
-  // IntersectionObserver for Scrollspy across main sections
+  // High-performance, robust Scrollspy using requestAnimationFrame and explicit document bounds
   useEffect(() => {
-    const intersectingMap = new Map();
+    const sectionIds = NAV_LINKS.map((link) => link.id);
+    let rafId = null;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            intersectingMap.set(entry.target.id, entry.intersectionRatio);
-          } else {
-            intersectingMap.delete(entry.target.id);
-          }
-        });
-
-        // Do not let observer override if user recently clicked a specific navigation link
-        if (isManualClickRef.current) {
-          return;
-        }
-
-        if (intersectingMap.size > 0) {
-          let bestId = null;
-          let highestRatio = -1;
-
-          intersectingMap.forEach((ratio, id) => {
-            if (ratio > highestRatio) {
-              highestRatio = ratio;
-              bestId = id;
-            }
-          });
-
-          if (bestId) {
-            setActiveSection(bestId);
-          }
-        }
-      },
-      {
-        rootMargin: "-20% 0px -55% 0px",
-        threshold: [0, 0.1, 0.25, 0.5, 0.75],
-      }
-    );
-
-    OBSERVED_SECTIONS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    const handleScrollEdges = () => {
+    const checkActiveSection = () => {
       if (isManualClickRef.current) return;
 
-      if (window.scrollY < 80) {
+      const scrollY = window.scrollY;
+      const innerHeight = window.innerHeight;
+      const scrollHeight = document.documentElement.scrollHeight;
+
+      // 1. Explicit top of document
+      if (scrollY < 80) {
         setActiveSection("inicio");
         return;
       }
-      if (
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 50
-      ) {
+
+      // 2. Explicit end of document (ensures Contacto stays active at FinalCTA & Footer)
+      if (innerHeight + scrollY >= scrollHeight - 200) {
         setActiveSection("contacto");
+        return;
       }
+
+      // 3. Navbar offset threshold (accounts for fixed header height: 84px desktop, 72px mobile)
+      const navbarOffset = window.innerWidth >= 768 ? 110 : 90;
+
+      // Evaluate sections in DOM order
+      let currentId = "inicio";
+      for (let i = 0; i < sectionIds.length; i++) {
+        const id = sectionIds[i];
+        const el = document.getElementById(id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= navbarOffset) {
+          currentId = id;
+        } else {
+          break;
+        }
+      }
+
+      setActiveSection(currentId);
     };
 
-    window.addEventListener("scroll", handleScrollEdges, { passive: true });
+    const handleScroll = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(checkActiveSection);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
+    // Initial check on mount (handles deep-linking e.g. /#contacto)
+    checkActiveSection();
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", handleScrollEdges);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
       if (manualClickTimerRef.current) {
         clearTimeout(manualClickTimerRef.current);
       }
@@ -176,7 +161,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Navigation Links - Rendered Sections Only */}
         <div className="hidden lg:flex items-center gap-8 xl:gap-10">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.id;
@@ -199,10 +184,11 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Desktop Right CTA -> #agenda */}
+        {/* Desktop Right CTA -> Canonical #contacto */}
         <div className="hidden lg:flex items-center">
           <Link
-            href="#agenda"
+            href="#contacto"
+            onClick={() => handleNavClick("contacto")}
             className="inline-flex items-center justify-center text-[11px] tracking-[0.22em] uppercase font-sans text-[#f5f3ef] border border-[#c5a880]/60 hover:border-[#c5a880] hover:text-[#c5a880] hover:bg-[#c5a880]/10 transition-all duration-300 px-5 py-2.5 rounded-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
           >
             Agenda tu cita
@@ -212,7 +198,8 @@ export default function Navbar() {
         {/* Mobile Top Controls */}
         <div className="flex items-center gap-4 lg:hidden">
           <Link
-            href="#agenda"
+            href="#contacto"
+            onClick={() => handleNavClick("contacto")}
             className="text-[10px] tracking-[0.18em] uppercase font-sans text-[#f5f3ef] border border-[#c5a880]/50 px-3.5 py-1.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
           >
             Cita
@@ -251,7 +238,7 @@ export default function Navbar() {
       <div
         id="mobile-menu"
         aria-hidden={!mobileMenuOpen}
-        className={`lg:hidden fixed inset-0 top-[60px] bg-[#0b0a09]/98 backdrop-blur-xl transition-all duration-300 ease-in-out ${
+        className={`lg:hidden fixed inset-0 top-[60px] bg-[#0b0a09] z-50 transition-all duration-300 ease-in-out ${
           mobileMenuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-4"
@@ -294,11 +281,14 @@ export default function Navbar() {
 
           <div className="pt-6">
             <Link
-              href="#agenda"
-              onClick={() => setMobileMenuOpen(false)}
+              href="#contacto"
+              onClick={() => {
+                handleNavClick("contacto");
+                setMobileMenuOpen(false);
+              }}
               className="w-full flex items-center justify-center text-xs tracking-[0.25em] uppercase font-sans text-center text-[#f5f3ef] border border-[#c5a880] py-3.5 hover:bg-[#c5a880]/10 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
             >
-              Agenda tu cita privada
+              Agenda tu cita previa
             </Link>
             <p className="text-[10px] text-[#dedad5] text-center tracking-wider mt-3 font-sans">
               Atención exclusiva con cita previa

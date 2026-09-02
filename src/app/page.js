@@ -16,16 +16,18 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <EditorialStatement />
-      <Experience />
-      <Services />
-      <Process />
-      <AboutKV />
-      <Testimonials />
-      <Showrooms />
-      <DestinationExperience />
-      <FinalCTA />
+      <main>
+        <Hero />
+        <EditorialStatement />
+        <Experience />
+        <Services />
+        <Process />
+        <AboutKV />
+        <Testimonials />
+        <Showrooms />
+        <DestinationExperience />
+        <FinalCTA />
+      </main>
       <Footer />
       <WhatsAppButton />
     </>
