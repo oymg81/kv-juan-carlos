@@ -6,7 +6,7 @@ export default function Testimonials() {
   return (
     <section
       id="historias"
-      className="relative w-full bg-[#0b0a09] text-[#f5f3ef] py-24 sm:py-32 lg:py-40 border-t border-white/5 overflow-hidden"
+      className="relative w-full bg-[#0b0a09] text-[#f5f3ef] pt-8 sm:pt-10 lg:pt-14 pb-16 sm:pb-20 lg:pb-24 border-t border-white/5 overflow-x-clip"
       aria-labelledby="historias-title"
     >
       {/* Subtle atmospheric ambient glow */}
@@ -17,7 +17,7 @@ export default function Testimonials() {
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <span className="text-xs uppercase tracking-[0.25em] text-[var(--gold-accent)] font-sans font-medium mb-3 block">
             {eyebrow}
           </span>

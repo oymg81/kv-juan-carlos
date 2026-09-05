@@ -6,12 +6,12 @@ export default function Showrooms() {
   return (
     <section
       id="showrooms"
-      className="relative w-full bg-[#faf8f5] text-[#171615] py-24 sm:py-32 lg:py-40 border-t border-[#171615]/5"
+      className="relative w-full bg-[#faf8f5] text-[#171615] pt-8 sm:pt-10 lg:pt-14 pb-16 sm:pb-20 lg:pb-24 border-t border-[#171615]/5"
       aria-labelledby="showrooms-heading"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <span className="text-xs uppercase tracking-[0.25em] text-[#8e785c] font-sans font-medium mb-3 block">
             {eyebrow}
           </span>

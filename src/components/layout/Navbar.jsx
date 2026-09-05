@@ -19,19 +19,45 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
 
-  // Lock to avoid rapid flickering when user clicks a link that scrolls past intermediate sections
-  const isManualClickRef = useRef(false);
-  const manualClickTimerRef = useRef(null);
+  const headerRef = useRef(null);
+
+  // Helper to compute exact final scroll position for any target ID
+  const computeExpectedScrollY = (targetId) => {
+    if (typeof window === "undefined" || typeof document === "undefined") return 0;
+    if (targetId === "inicio") return 0;
+
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return 0;
+
+    const root = document.documentElement;
+    const headerEl = headerRef.current;
+    const headerHeight = headerEl
+      ? headerEl.getBoundingClientRect().height
+      : (window.innerWidth >= 768 ? 90 : 72);
+
+    const computedScrollPadding = Number.parseFloat(
+      window.getComputedStyle(root).scrollPaddingTop
+    );
+    const scrollPaddingTop = Number.isFinite(computedScrollPadding) && computedScrollPadding > 0
+      ? computedScrollPadding
+      : headerHeight;
+
+    const targetDocTop = window.scrollY + targetEl.getBoundingClientRect().top;
+    const maxScrollY = Math.max(0, root.scrollHeight - window.innerHeight);
+
+    return Math.min(Math.max(0, Math.round(targetDocTop - scrollPaddingTop)), maxScrollY);
+  };
+
+  // Deterministic navigation target tracking (no fixed time delays, bidirectional)
+  const pendingTargetRef = useRef(null);
 
   const handleNavClick = (id) => {
     setActiveSection(id);
-    isManualClickRef.current = true;
-    if (manualClickTimerRef.current) {
-      clearTimeout(manualClickTimerRef.current);
-    }
-    manualClickTimerRef.current = setTimeout(() => {
-      isManualClickRef.current = false;
-    }, 850);
+    const expected = computeExpectedScrollY(id);
+    pendingTargetRef.current = {
+      id,
+      expectedScrollY: expected,
+    };
   };
 
   useEffect(() => {
@@ -65,34 +91,66 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
-  // High-performance, robust Scrollspy using requestAnimationFrame and explicit document bounds
+  // High-performance, deterministic Scrollspy using requestAnimationFrame and real DOM boundaries
   useEffect(() => {
     const sectionIds = NAV_LINKS.map((link) => link.id);
     let rafId = null;
 
-    const checkActiveSection = () => {
-      if (isManualClickRef.current) return;
+    const cancelPending = () => {
+      pendingTargetRef.current = null;
+    };
 
+    const checkActiveSection = () => {
       const scrollY = window.scrollY;
       const innerHeight = window.innerHeight;
       const scrollHeight = document.documentElement.scrollHeight;
+      const maxScrollY = Math.max(0, scrollHeight - innerHeight);
+      const isAtBottom = Math.ceil(scrollY + innerHeight) >= scrollHeight - 2;
+
+      // Dynamic activation line at navbar bottom with 3px subpixel tolerance
+      const headerEl = headerRef.current;
+      const headerHeight = headerEl
+        ? headerEl.getBoundingClientRect().height
+        : (window.innerWidth >= 768 ? 90 : 72);
+      const activationThreshold = headerHeight + 3;
+
+      // If there is a pending user click target, verify if target has reached position in either direction
+      if (pendingTargetRef.current) {
+        const { id: targetId, expectedScrollY } = pendingTargetRef.current;
+        let reached = false;
+
+        // 1. Precise position match within 3px subpixel tolerance (handles both upward and downward travel)
+        if (Math.abs(scrollY - expectedScrollY) <= 3) {
+          reached = true;
+        } else if (targetId === "inicio" && scrollY < 50) {
+          reached = true;
+        } else if (isAtBottom && expectedScrollY >= maxScrollY - 2) {
+          // Bottom reached ONLY when the target's expected coordinate is actually constrained by document bottom
+          reached = true;
+        }
+
+        if (reached) {
+          pendingTargetRef.current = null;
+        } else {
+          // Keep requested target active while programmatic smooth scroll is underway in either direction
+          setActiveSection(targetId);
+          return;
+        }
+      }
 
       // 1. Explicit top of document
-      if (scrollY < 80) {
+      if (scrollY < 50) {
         setActiveSection("inicio");
         return;
       }
 
-      // 2. Explicit end of document (ensures Contacto stays active at FinalCTA & Footer)
-      if (innerHeight + scrollY >= scrollHeight - 200) {
+      // 2. Real physical end of document boundary (subpixel tolerance of 2px)
+      if (isAtBottom) {
         setActiveSection("contacto");
         return;
       }
 
-      // 3. Navbar offset threshold (accounts for fixed header height: 84px desktop, 72px mobile)
-      const navbarOffset = window.innerWidth >= 768 ? 110 : 90;
-
-      // Evaluate sections in DOM order
+      // 3. Evaluate sections in DOM order: pick the last section whose top has reached or passed the activation line
       let currentId = "inicio";
       for (let i = 0; i < sectionIds.length; i++) {
         const id = sectionIds[i];
@@ -100,7 +158,7 @@ export default function Navbar() {
         if (!el) continue;
 
         const rect = el.getBoundingClientRect();
-        if (rect.top <= navbarOffset) {
+        if (rect.top <= activationThreshold) {
           currentId = id;
         } else {
           break;
@@ -115,24 +173,80 @@ export default function Navbar() {
       rafId = requestAnimationFrame(checkActiveSection);
     };
 
+    const handleHashChange = () => {
+      if (window.location.hash) {
+        const hashId = window.location.hash.replace("#", "");
+        if (sectionIds.includes(hashId)) {
+          setActiveSection(hashId);
+          const expected = computeExpectedScrollY(hashId);
+          pendingTargetRef.current = {
+            id: hashId,
+            expectedScrollY: expected,
+          };
+        }
+      }
+    };
+
+    // User manual interruption listeners: immediately cancel pending programmatic target
+    const handleUserInteraction = () => {
+      cancelPending();
+      handleScroll();
+    };
+
+    const handleNavKeys = (e) => {
+      const scrollKeys = ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "];
+      if (scrollKeys.includes(e.key)) {
+        cancelPending();
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll, { passive: true });
+    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("popstate", handleHashChange);
+    window.addEventListener("wheel", handleUserInteraction, { passive: true });
+    window.addEventListener("touchstart", handleUserInteraction, { passive: true });
+    window.addEventListener("pointerdown", handleUserInteraction, { passive: true });
+    window.addEventListener("keydown", handleNavKeys, { passive: true });
 
-    // Initial check on mount (handles deep-linking e.g. /#contacto)
+    // scrollend event when supported by the browser
+    if ("onscrollend" in window) {
+      window.addEventListener("scrollend", handleUserInteraction, { passive: true });
+    }
+
+    // Initial check on mount (handles direct deep-links e.g. /#experiencia)
+    if (window.location.hash) {
+      const initialHashId = window.location.hash.replace("#", "");
+      if (sectionIds.includes(initialHashId)) {
+        setActiveSection(initialHashId);
+        const expected = computeExpectedScrollY(initialHashId);
+        pendingTargetRef.current = {
+          id: initialHashId,
+          expectedScrollY: expected,
+        };
+      }
+    }
     checkActiveSection();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-      if (manualClickTimerRef.current) {
-        clearTimeout(manualClickTimerRef.current);
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("popstate", handleHashChange);
+      window.removeEventListener("wheel", handleUserInteraction);
+      window.removeEventListener("touchstart", handleUserInteraction);
+      window.removeEventListener("pointerdown", handleUserInteraction);
+      window.removeEventListener("keydown", handleNavKeys);
+      if ("onscrollend" in window) {
+        window.removeEventListener("scrollend", handleUserInteraction);
       }
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
   return (
     <header
+      ref={headerRef}
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ${
         isScrolled
           ? "bg-[#0b0a09]/60 backdrop-blur-md border-b border-white/[0.05] py-2 sm:py-2.5"

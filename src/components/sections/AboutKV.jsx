@@ -7,7 +7,7 @@ export default function AboutKV() {
   return (
     <section
       id="sobre-kv"
-      className="relative w-full bg-[#0b0a09] text-[#f5f3ef] py-24 sm:py-32 lg:py-40 border-t border-white/5 overflow-hidden"
+      className="relative w-full bg-[#0b0a09] text-[#f5f3ef] pt-8 sm:pt-10 lg:pt-14 pb-16 sm:pb-20 lg:pb-24 border-t border-white/5 overflow-x-clip"
       aria-labelledby="sobre-kv-heading"
     >
       {/* Subtle atmospheric ambient glow */}
@@ -17,7 +17,7 @@ export default function AboutKV() {
       />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-start">
           {/* Left Column: Architectural Editorial Brand Composition */}
           <div className="lg:col-span-5 flex justify-center w-full order-2 lg:order-1">
             <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] max-w-md lg:max-w-none bg-[#141312] border border-[#c5a880]/25 p-8 sm:p-10 flex flex-col justify-between overflow-hidden shadow-2xl shadow-black/60">
@@ -81,7 +81,7 @@ export default function AboutKV() {
           </div>
 
           {/* Right Column: Editorial Narrative, Trust Indicators & Brand Attribution */}
-          <div className="lg:col-span-7 flex flex-col justify-center order-1 lg:order-2">
+          <div className="lg:col-span-7 flex flex-col order-1 lg:order-2">
             {/* Eyebrow */}
             <span className="text-xs uppercase tracking-[0.25em] text-[#c5a880] font-sans font-medium mb-4 block">
               {eyebrow}
@@ -103,7 +103,7 @@ export default function AboutKV() {
             </div>
 
             {/* Trust Indicators: Confirmed Focus, Proposal, and Experience Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 sm:pt-12 mt-10 sm:mt-12 border-t border-white/10">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 sm:pt-10 mt-8 sm:mt-10 border-t border-white/10">
               {trustIndicators.map((item) => (
                 <div key={item.label} className="flex flex-col">
                   <span className="text-[11px] uppercase tracking-[0.22em] font-sans font-medium text-[#c5a880] mb-2">
@@ -117,7 +117,7 @@ export default function AboutKV() {
             </div>
 
             {/* Brand Attribution Footer */}
-            <div className="mt-10 sm:mt-12 pt-8 border-t border-white/10 flex items-center justify-between">
+            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10 flex items-center justify-between">
               <div>
                 <p className="font-serif text-xl sm:text-2xl text-[#f5f3ef] tracking-wide">
                   {brand.name}

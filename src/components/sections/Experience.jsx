@@ -2,13 +2,13 @@ export default function Experience() {
   return (
     <section
       id="experiencia"
-      className="relative w-full bg-[#faf8f5] text-[#171615] py-24 sm:py-32 lg:py-40 border-t border-[#171615]/5"
+      className="relative w-full bg-[#faf8f5] text-[#171615] pt-8 sm:pt-10 lg:pt-14 pb-16 sm:pb-20 lg:pb-24 border-t border-[#171615]/5"
       aria-labelledby="experiencia-heading"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-start">
           {/* Left Column: Editorial Brand Story & Values */}
-          <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
+          <div className="lg:col-span-7 xl:col-span-7 flex flex-col">
             {/* Eyebrow */}
             <span className="text-xs uppercase tracking-[0.25em] text-[#8e785c] font-sans font-medium mb-4 block">
               La Experiencia KV
@@ -49,7 +49,7 @@ export default function Experience() {
             </div>
 
             {/* Three Value Items */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 sm:pt-12 mt-10 sm:mt-12 border-t border-[#171615]/10">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 sm:pt-10 mt-8 sm:mt-10 border-t border-[#171615]/10">
               {/* Item 1: Asesoría Personalizada */}
               <div className="flex flex-col items-start">
                 <div
