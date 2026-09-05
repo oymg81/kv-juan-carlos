@@ -76,7 +76,7 @@ function ProcessIcon({ type }) {
 }
 
 export default function Process() {
-  const { title, eyebrow, steps } = processData;
+  const { title, steps } = processData;
 
   return (
     <section
@@ -87,9 +87,6 @@ export default function Process() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <span className="text-xs uppercase tracking-[0.25em] text-[#8e785c] font-sans font-medium mb-3 block">
-            {eyebrow}
-          </span>
           <h2
             id="proceso-heading"
             className="font-serif font-light text-2xl sm:text-3xl lg:text-[2.65rem] tracking-[0.16em] sm:tracking-[0.2em] uppercase text-[#171615] leading-tight"

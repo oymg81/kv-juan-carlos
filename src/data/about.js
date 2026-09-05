@@ -1,13 +1,13 @@
 export const aboutData = {
   eyebrow: "SOBRE KV",
-  title: "Una visión personal para el novio",
+  title: "Diseño, técnica y dedicación.",
   paragraphs: [
-    "KV es la marca personal de Juan Carlos Gonzales y una propuesta especializada para novios. Aquí, el traje no se entiende como una prenda aislada, sino como parte de una imagen completa, coherente y personal.",
-    "La experiencia comienza con una asesoría personalizada para conocer al cliente, su personalidad, el concepto de su boda y cómo quiere verse y sentirse ese día.",
-    "A partir de esa conversación, KV diseña el look de manera integral: traje, calzado y accesorios. El diseño personalizado, la asesoría de imagen, la confección a medida y una atención privada y cercana definen la propuesta.",
+    "Soy Juan Carlos Gonzales. Mi enfoque combina el diseño con la sastrería fina para crear piezas únicas que reflejen tu personalidad y encuentren su propio lenguaje en armonía con el vestido de la novia.",
+    "Conocer tu estilo, la esencia de la celebración y la visión de ambos me permite desarrollar una propuesta pensada para lograr armonía visual y una elegancia que trascienda las tendencias.",
   ],
   brand: {
     name: "Juan Carlos Gonzales",
+    role: "FUNDADOR Y DISEÑADOR",
     label: "KV by Juan Carlos Gonzales",
   },
   trustIndicators: [

@@ -57,23 +57,35 @@ export default function Showrooms() {
                 </span>
               </div>
 
-              {/* Address & Attention Condition */}
-              <div className="relative z-10 py-8 space-y-6">
-                <address className="not-italic text-sm sm:text-base text-[#524e48] font-sans leading-relaxed">
-                  <p className="text-[#171615] font-medium text-base sm:text-lg">
-                    {location.address.street}
-                  </p>
-                  <p className="text-[#6b6761] mt-1">
-                    {location.address.city}, {location.address.country}
-                  </p>
-                </address>
+              {/* Story Narratives & Address Details */}
+              <div className="relative z-10 py-8 space-y-6 flex-1 flex flex-col justify-between">
+                {/* Location Narrative Copy */}
+                {location.paragraphs && location.paragraphs.length > 0 && (
+                  <div className="space-y-4 text-sm sm:text-[15px] text-[#524e48] font-sans font-light leading-relaxed">
+                    {location.paragraphs.map((p, idx) => (
+                      <p key={idx}>{p}</p>
+                    ))}
+                  </div>
+                )}
 
-                <div className="flex items-center gap-2.5 text-xs uppercase tracking-[0.16em] text-[#8e785c] font-sans font-medium">
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-[#8e785c]"
-                    aria-hidden="true"
-                  />
-                  <span>{location.condition}</span>
+                {/* Postal Address & Condition */}
+                <div className="pt-6 border-t border-[#ded5c9]/60 space-y-4">
+                  <address className="not-italic text-sm sm:text-base text-[#524e48] font-sans leading-relaxed">
+                    <p className="text-[#171615] font-medium text-base sm:text-lg">
+                      {location.address.street}
+                    </p>
+                    <p className="text-[#6b6761] mt-1">
+                      {location.address.city}, {location.address.country}
+                    </p>
+                  </address>
+
+                  <div className="flex items-center gap-2.5 text-xs uppercase tracking-[0.16em] text-[#8e785c] font-sans font-medium">
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-[#8e785c]"
+                      aria-hidden="true"
+                    />
+                    <span>{location.condition}</span>
+                  </div>
                 </div>
               </div>
 
@@ -83,7 +95,7 @@ export default function Showrooms() {
                   href={location.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Abrir ubicación de Showroom ${location.name} en Google Maps`}
+                  aria-label={`Abrir ubicación de ${location.name} en Google Maps`}
                   className="flex-1 inline-flex items-center justify-center gap-2 text-xs tracking-[0.2em] uppercase font-sans font-medium px-5 py-3.5 border border-[#171615]/20 hover:border-[#8e785c] text-[#171615] hover:text-[#8e785c] hover:bg-white/40 transition-all duration-300 min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8e785c]"
                 >
                   <span>Abrir en Google Maps</span>

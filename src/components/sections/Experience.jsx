@@ -25,21 +25,32 @@ export default function Experience() {
             {/* Editorial Body Text */}
             <div className="space-y-6 text-[#524e48] font-sans text-sm sm:text-base leading-relaxed max-w-2xl">
               <p>
-                La Experiencia KV comienza con una asesoría personalizada en la
-                que conocemos al cliente, su personalidad, el concepto de su
-                boda, algunos detalles de alta costura y cómo quiere sentirse y
-                verse ese día.
+                La Experiencia KV comienza con una conversación. Queremos
+                conocer cómo imaginas ese día, tu personalidad, el lugar, el
+                momento y, sobre todo, cómo quieres sentirte y qué quieres
+                transmitir.
               </p>
               <p>
-                A partir de esa conversación, diseñamos su look de manera
-                integral: traje, calzado y accesorios, cuidando cada detalle para
-                que el resultado represente su estilo y personalidad.
+                A partir de esa visión, te orientamos y construimos contigo una
+                propuesta desde la alta costura y la sastrería a medida,
+                explorando las posibilidades de silueta, proporciones,
+                materiales, texturas y detalles que mejor expresen tu estilo.
+              </p>
+              <p>
+                No se trata simplemente de elegir qué ponerte.
+                <br />
+                Se trata de encontrar una forma de vestir que hable de ti y tenga
+                sentido para ese momento.
+              </p>
+              <p>
+                Cada decisión se desarrolla de manera personalizada, hasta
+                conseguir una propuesta coherente, sofisticada y propia.
               </p>
             </div>
 
             {/* Three Value Items */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 sm:pt-12 mt-10 sm:mt-12 border-t border-[#171615]/10">
-              {/* Item 1: Atención Personalizada */}
+              {/* Item 1: Asesoría Personalizada */}
               <div className="flex flex-col items-start">
                 <div
                   className="w-10 h-10 flex items-center justify-center text-[#8e785c] mb-3.5"
@@ -57,11 +68,11 @@ export default function Experience() {
                   </svg>
                 </div>
                 <h3 className="text-[11px] sm:text-xs uppercase tracking-[0.2em] font-sans font-medium text-[#171615] leading-snug">
-                  Atención Personalizada
+                  ASESORÍA PERSONALIZADA
                 </h3>
               </div>
 
-              {/* Item 2: Showroom Privado */}
+              {/* Item 2: Alta Costura y Sastrería */}
               <div className="flex flex-col items-start">
                 <div
                   className="w-10 h-10 flex items-center justify-center text-[#8e785c] mb-3.5"
@@ -74,16 +85,16 @@ export default function Experience() {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M2.25 21h19.5m-18-18v18m16.5-18v18m-13.5 0V9.75A2.25 2.25 0 019 7.5h6a2.25 2.25 0 012.25 2.25V21M9 13.5h.008v.008H9V13.5zm6 0h.008v.008H15V13.5z"
+                      d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5m10.5-9.75L20.25 9.5m-6.75 7.5l4.5 4.5m-9-3l-4.5 4.5M12 21a9 9 0 100-18 9 9 0 000 18z"
                     />
                   </svg>
                 </div>
                 <h3 className="text-[11px] sm:text-xs uppercase tracking-[0.2em] font-sans font-medium text-[#171615] leading-snug">
-                  Showroom Privado
+                  ALTA COSTURA Y SASTRERÍA
                 </h3>
               </div>
 
-              {/* Item 3: Experiencia Única */}
+              {/* Item 3: Una Experiencia Propia */}
               <div className="flex flex-col items-start">
                 <div
                   className="w-10 h-10 flex items-center justify-center text-[#8e785c] mb-3.5"
@@ -101,7 +112,7 @@ export default function Experience() {
                   </svg>
                 </div>
                 <h3 className="text-[11px] sm:text-xs uppercase tracking-[0.2em] font-sans font-medium text-[#171615] leading-snug">
-                  Experiencia Única
+                  UNA EXPERIENCIA PROPIA
                 </h3>
               </div>
             </div>

@@ -123,7 +123,7 @@ export default function AboutKV() {
                   {brand.name}
                 </p>
                 <p className="text-xs uppercase tracking-[0.2em] text-[#c5a880] font-sans font-medium mt-1">
-                  {brand.label}
+                  {brand.role}
                 </p>
               </div>
 

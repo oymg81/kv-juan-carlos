@@ -32,8 +32,8 @@ export default function Hero() {
         <div className="lg:hidden absolute inset-0 bg-gradient-to-t from-[#0b0a09] via-[#0b0a09]/80 to-[#0b0a09]/30 z-10" />
       </div>
 
-      {/* Main Content Area - Shifted slightly upward on desktop for better editorial integration */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-28 pb-14 sm:pt-32 sm:pb-16 lg:py-0 flex flex-col justify-end lg:justify-center min-h-[100svh] lg:-translate-y-8 xl:-translate-y-12">
+      {/* Main Content Area - Vertically centered within available height below fixed navbar */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-24 pb-14 sm:pt-28 sm:pb-16 lg:pt-[84px] lg:pb-8 flex flex-col justify-end lg:justify-center min-h-[100svh]">
         <div className="max-w-xl xl:max-w-2xl">
           {/* Primary Editorial Headline (h1) */}
           <h1 className="font-serif font-light text-[2.5rem] leading-[1.12] sm:text-5xl sm:leading-[1.12] md:text-6xl md:leading-[1.08] lg:text-[3.5rem] xl:text-[4rem] text-[#f5f3ef] tracking-tight">

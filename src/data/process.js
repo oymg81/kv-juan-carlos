@@ -1,6 +1,5 @@
 export const processData = {
   title: "TU EXPERIENCIA, PASO A PASO",
-  eyebrow: "MÉTODO KV",
   steps: [
     {
       number: "01",

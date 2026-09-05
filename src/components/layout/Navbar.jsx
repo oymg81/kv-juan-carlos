@@ -9,7 +9,8 @@ const NAV_LINKS = [
   { href: "#experiencia", id: "experiencia", label: "Experiencia KV" },
   { href: "#proceso", id: "proceso", label: "Proceso" },
   { href: "#sobre-kv", id: "sobre-kv", label: "Sobre KV" },
-  { href: "#showrooms", id: "showrooms", label: "Showrooms" },
+  { href: "#historias", id: "historias", label: "Historias" },
+  { href: "#showrooms", id: "showrooms", label: "Showroom" },
   { href: "#contacto", id: "contacto", label: "Contacto" },
 ];
 
@@ -134,8 +135,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-[#0b0a09]/60 backdrop-blur-md border-b border-white/[0.05] py-3 sm:py-3.5"
-          : "bg-gradient-to-b from-[#0b0a09]/60 via-[#0b0a09]/20 to-transparent py-4 sm:py-5"
+          ? "bg-[#0b0a09]/60 backdrop-blur-md border-b border-white/[0.05] py-2 sm:py-2.5"
+          : "bg-gradient-to-b from-[#0b0a09]/60 via-[#0b0a09]/20 to-transparent py-3 sm:py-3.5"
       }`}
     >
       <nav
@@ -146,23 +147,23 @@ export default function Navbar() {
         <Link
           href="#inicio"
           onClick={() => handleNavClick("inicio")}
-          className="flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
-          aria-label="KV by Juan Carlos Gonzales - Ir al inicio"
+          className="flex items-center group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
+          aria-label="KV by Juan Carlos Gonzales — Ir al inicio"
         >
-          <div className="relative h-11 sm:h-12 md:h-[50px] w-36 sm:w-44 md:w-48 overflow-hidden">
+          <div className="relative h-[55px] w-[100px] sm:h-[63px] sm:w-[114px] md:h-[68px] md:w-[124px] overflow-hidden">
             <Image
-              src="/logo/logo-kv.jpeg"
-              alt="KV by Juan Carlos Gonzales"
+              src="/logo/kv-logo-navbar.png"
+              alt=""
               fill
-              sizes="(max-width: 640px) 144px, (max-width: 768px) 176px, 192px"
+              sizes="(max-width: 640px) 100px, (max-width: 768px) 114px, 124px"
               priority
-              className="object-contain invert contrast-150 mix-blend-screen transition-opacity duration-300 group-hover:opacity-90"
+              className="object-contain transition-opacity duration-300 group-hover:opacity-90"
             />
           </div>
         </Link>
 
-        {/* Desktop Navigation Links - Rendered Sections Only */}
-        <div className="hidden lg:flex items-center gap-8 xl:gap-10">
+        {/* Desktop Navigation Links - Rendered Sections Only (>= 1280px xl) */}
+        <div className="hidden xl:flex items-center gap-6 2xl:gap-8">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.id;
 
@@ -172,7 +173,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => handleNavClick(link.id)}
                 aria-current={isActive ? "location" : undefined}
-                className={`text-[11px] tracking-[0.2em] uppercase font-sans transition-colors duration-300 relative py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880] ${
+                className={`text-[11px] xl:text-[11px] 2xl:text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300 relative py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880] ${
                   isActive
                     ? "text-[#c5a880] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-[#c5a880]"
                     : "text-[#f5f3ef]/80 hover:text-[#c5a880]"
@@ -184,23 +185,23 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Desktop Right CTA -> Canonical #contacto */}
-        <div className="hidden lg:flex items-center">
+        {/* Desktop Right CTA -> Canonical #contacto (>= 1280px xl) */}
+        <div className="hidden xl:flex items-center">
           <Link
             href="#contacto"
             onClick={() => handleNavClick("contacto")}
-            className="inline-flex items-center justify-center text-[11px] tracking-[0.22em] uppercase font-sans text-[#f5f3ef] border border-[#c5a880]/60 hover:border-[#c5a880] hover:text-[#c5a880] hover:bg-[#c5a880]/10 transition-all duration-300 px-5 py-2.5 rounded-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
+            className="inline-flex items-center justify-center text-[11px] 2xl:text-xs tracking-[0.22em] uppercase font-sans text-[#f5f3ef] border border-[#c5a880]/60 hover:border-[#c5a880] hover:text-[#c5a880] hover:bg-[#c5a880]/10 transition-all duration-300 px-5 py-2.5 rounded-none min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
           >
             Agenda tu cita
           </Link>
         </div>
 
-        {/* Mobile Top Controls */}
-        <div className="flex items-center gap-4 lg:hidden">
+        {/* Mobile / Compact Top Controls (< 1280px xl) */}
+        <div className="flex items-center gap-3 sm:gap-4 xl:hidden">
           <Link
             href="#contacto"
             onClick={() => handleNavClick("contacto")}
-            className="text-[10px] tracking-[0.18em] uppercase font-sans text-[#f5f3ef] border border-[#c5a880]/50 px-3.5 py-1.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
+            className="inline-flex items-center justify-center text-[11px] tracking-[0.18em] uppercase font-sans text-[#f5f3ef] border border-[#c5a880]/50 px-3.5 py-2 min-h-[44px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
           >
             Cita
           </Link>
@@ -210,7 +211,7 @@ export default function Navbar() {
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
             aria-label={mobileMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
-            className="p-2 text-[#f5f3ef] hover:text-[#c5a880] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880] transition-colors"
+            className="p-3 text-[#f5f3ef] hover:text-[#c5a880] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <span className="sr-only">Menú</span>
             <div className="w-6 h-4 relative flex flex-col justify-between">
@@ -234,17 +235,17 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile / Compact Drawer (< 1280px xl) */}
       <div
         id="mobile-menu"
         aria-hidden={!mobileMenuOpen}
-        className={`lg:hidden fixed inset-0 top-[60px] bg-[#0b0a09] z-50 transition-all duration-300 ease-in-out ${
+        className={`xl:hidden fixed inset-0 top-[76px] sm:top-[80px] bg-[#0b0a09] z-50 transition-all duration-300 ease-in-out ${
           mobileMenuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-4"
         }`}
       >
-        <div className="flex flex-col h-[calc(100svh-60px)] px-8 pt-8 pb-12 justify-between border-t border-white/5">
+        <div className="flex flex-col h-[calc(100svh-76px)] sm:h-[calc(100svh-80px)] px-8 pt-8 pb-12 justify-between border-t border-white/5">
           <div className="flex flex-col gap-6">
             <p className="text-[10px] uppercase tracking-[0.25em] text-[#c5a880]/70 font-sans">
               Menú Principal
