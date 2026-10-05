@@ -264,12 +264,12 @@ export default function Navbar() {
           className="flex items-center group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a880]"
           aria-label="KV by Juan Carlos Gonzales — Ir al inicio"
         >
-          <div className="relative h-[55px] w-[100px] sm:h-[63px] sm:w-[114px] md:h-[68px] md:w-[124px] overflow-hidden">
+          <div className="relative h-[52px] w-[105px] sm:h-[58px] sm:w-[118px] md:h-[62px] md:w-[128px] overflow-hidden">
             <Image
-              src="/logo/kv-logo-navbar.png"
+              src="/logo/kv-logo-navbar-simplified.webp"
               alt=""
               fill
-              sizes="(max-width: 640px) 100px, (max-width: 768px) 114px, 124px"
+              sizes="(max-width: 640px) 105px, (max-width: 768px) 118px, 128px"
               priority
               className="object-contain transition-opacity duration-300 group-hover:opacity-90"
             />

@@ -1,8 +1,14 @@
 export const showroomsData = {
   eyebrow: "SHOWROOM",
   title: "Dos espacios, una misma historia",
-  introduction:
-    "Elige la ubicación que te resulte más conveniente. La atención en ambos espacios se realiza únicamente con cita previa para ofrecer una experiencia privada y personalizada.",
+  paragraphs: [
+    "Hace más de 16 años comenzó la historia de KV. Desde entonces, hemos construido una manera propia de entender la sastrería: cercana, personalizada y dedicada a crear prendas que representan a quien las lleva.",
+    "Hoy contamos con dos espacios que forman parte de ese recorrido. Para comenzar tu experiencia KV, te recibiremos en nuestro showroom privado, con cita previa y atención exclusiva.",
+  ],
+  featuredImage: {
+    src: "/images/kv-showroom-logo-wall.webp",
+    alt: "Showroom privado de KV by Juan Carlos Gonzales en Miraflores con pared iluminada y sastrería a medida",
+  },
   phone: {
     display: "+51 949 257 356",
     href: "tel:+51949257356",

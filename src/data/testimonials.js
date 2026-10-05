@@ -41,6 +41,6 @@ export const testimonials = [
 ];
 
 export const testimonialsData = {
-  title: "Historias reales",
+  title: "Historias",
   items: testimonials,
 };

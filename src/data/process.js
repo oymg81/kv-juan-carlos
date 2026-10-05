@@ -5,7 +5,7 @@ export const processData = {
       number: "01",
       title: "CONOCEMOS",
       description:
-        "Comenzamos con una conversación personalizada para conocer tu estilo, tu boda y cómo quieres verte y sentirte ese día.",
+        "Comenzamos con una conversación personalizada sobre tu boda, tu estilo, la novia y los conceptos que mejor se adapten a ese gran día. Exploramos cortes, diseños y distintas telas para descubrir juntos la combinación que mejor representa cómo quieres verte y sentirte ese día.",
       icon: "dialogue",
     },
     {

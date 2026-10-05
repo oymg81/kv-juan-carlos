@@ -32,11 +32,11 @@ export default function Footer() {
             >
               <div className="relative h-11 sm:h-12 w-44 sm:w-48 overflow-hidden">
                 <Image
-                  src="/logo/logo-kv.jpeg"
+                  src="/logo/kv-logo-navbar-simplified.webp"
                   alt={brandName}
                   fill
                   sizes="(max-width: 640px) 176px, 192px"
-                  className="object-contain invert contrast-150 mix-blend-screen transition-opacity duration-300 group-hover:opacity-90"
+                  className="object-contain transition-opacity duration-300 group-hover:opacity-90"
                 />
               </div>
             </Link>
