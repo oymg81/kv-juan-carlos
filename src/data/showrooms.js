@@ -5,10 +5,6 @@ export const showroomsData = {
     "Hace más de 16 años comenzó la historia de KV. Desde entonces, hemos construido una manera propia de entender la sastrería: cercana, personalizada y dedicada a crear prendas que representan a quien las lleva.",
     "Hoy contamos con dos espacios que forman parte de ese recorrido. Para comenzar tu experiencia KV, te recibiremos en nuestro showroom privado, con cita previa y atención exclusiva.",
   ],
-  featuredImage: {
-    src: "/images/kv-showroom-logo-wall.webp",
-    alt: "Showroom privado de KV by Juan Carlos Gonzales en Miraflores con pared iluminada y sastrería a medida",
-  },
   phone: {
     display: "+51 949 257 356",
     href: "tel:+51949257356",
@@ -19,6 +15,9 @@ export const showroomsData = {
       number: "01",
       tag: "SHOWROOM 01",
       name: "SHOWROOM PRIVADO",
+      title: "SHOWROOM PRIVADO",
+      image: "/images/kv-showroom-privado.webp",
+      imageAlt: "Interior del showroom privado de KV by Juan Carlos Gonzales",
       paragraphs: [
         "El espacio donde recibimos a nuestros novios con atención exclusiva y cita previa.",
         "Aquí comienza la experiencia KV: una conversación personal para conocer su estilo, comprender la esencia de la celebración y desarrollar juntos una propuesta desde la alta sastrería.",
@@ -38,6 +37,9 @@ export const showroomsData = {
       number: "02",
       tag: "SHOWROOM 02",
       name: "DONDE TODO COMENZÓ",
+      title: "DONDE TODO COMENZÓ",
+      image: "/images/kv-donde-todo-comenzo.webp",
+      imageAlt: "Fachada del espacio donde comenzó KV by Juan Carlos Gonzales",
       paragraphs: [
         "Hace más de 16 años, KV comenzó aquí.",
         "Alcanfores representa el origen de nuestra historia, el lugar donde nació una manera de entender la sastrería y el diseño que continúa definiendo nuestro trabajo hasta hoy.",
